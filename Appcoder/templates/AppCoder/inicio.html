@@ -45,6 +45,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
 
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'create_post' %}">Post</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="{% url 'Cursos' %}">Cursos</a></li>
 
@@ -54,7 +55,7 @@
 
                     <li class="nav-item"><a class="nav-link" href="{% url 'Profesores' %}">Profesores</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="">{{avatar}}</a></li>
+                    <li class="nav-item"><a class="nav-link" href=""><img src="{{avatar}}"width="40px" alt="perfil"></a></li>
 
                     <li class="nav-item"><a class="nav-link" href="{% url 'perfil' %}">{{user.username}}</a></li>
 

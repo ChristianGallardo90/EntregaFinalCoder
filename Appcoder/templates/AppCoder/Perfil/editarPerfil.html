@@ -1,10 +1,14 @@
-<h3>Editar Perfil</h3>
-<h5>{{user.username}}</h5>
+{% extends "AppCoder/inicio.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+    <h3>Editar Perfil</h3>
+    <h5>{{user.username}}</h5>
 
-<form method="POST"> {% csrf_token %}
-    <table>
-        {{ form.as_table}}
-    </table>
-    <input type="submit" value="Editar perfil">
-</form>
-<a href="/Appcoder/Perfil/changePassword">Cambiar contraseña</a>
+    <form method="POST"> {% csrf_token %}
+        <table>
+            {{ form.as_table}}
+        </table>
+        <input type="submit" value="Editar perfil">
+    </form>
+    <a href="/Appcoder/Perfil/changePassword">Cambiar contraseña</a>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from Appcoder.views import inicio, cursos, entregables, estudiantes, profesores, setEstudiantes,getEstudiantes,buscarEstudiante,setCursos,getCursos,buscarCursos,setProfesores,getProfesores,buscarProfesores,eliminarEstudiante,editarEstudiante,loginWeb,registro,perfilview,editarPerfil,changePassword,editAvatar
+from Appcoder.views import inicio, cursos, entregables, estudiantes, profesores, setEstudiantes,getEstudiantes,buscarEstudiante,setCursos,getCursos,buscarCursos,setProfesores,getProfesores,buscarProfesores,eliminarEstudiante,editarEstudiante,loginWeb,registro,perfilview,editarPerfil,changePassword,editAvatar,createPost,detailPost
 urlpatterns = [
     
     path('inicio/', inicio, name="Inicio"),
@@ -25,7 +25,9 @@ urlpatterns = [
     path('perfil/',perfilview, name="perfil"),
     path('Perfil/editarPerfil/',editarPerfil, name="editarPerfil"),
     path('Perfil/changePassword/',changePassword, name="changePassword"),
-    path('Perfil/Avatar/',editAvatar, name="editAvatar"),
+    path('Perfil/changeAvatar/',editAvatar, name="editAvatar"),
+    path('create_post/', createPost, name='create_post'),
+    path('post/<int:pk>/', detailPost, name='detail_post'),
 
     
     

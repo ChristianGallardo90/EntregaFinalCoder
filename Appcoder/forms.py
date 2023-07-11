@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm
 from django.contrib.auth.models import User
+from .models import Post
 
 class formSetEstudiante(forms.Form):
     nombre = forms.CharField(max_length=30)
@@ -41,3 +42,8 @@ class ChangePasswordForm(PasswordChangeForm):
 
 class AvatarForm(forms.Form):
     avatar = forms.ImageField()
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content', 'image')    
