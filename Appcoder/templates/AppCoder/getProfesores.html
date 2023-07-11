@@ -1,0 +1,31 @@
+{% extends "AppCoder/profesores.html" %}
+{% load static %}
+
+{% block getProfesores %}
+<div class="formulario-custom">
+
+    <h5>Consultar Profesores</h5>
+
+    <form action="/Appcoder/buscarProfesores/" method="GET">
+        <input placeholder="Nombre" type="text" name="nombre" id="nombre">
+        <input type="submit" value="Buscar">
+    </form>
+
+    {% if profesores %}
+    <div class="resultados">
+        <h6>Resultados:</h6>
+
+        {% for profesor in profesores %}
+        <ul>
+            <li> {{profesor.nombre}} </li>
+            <li> {{profesor.apellido}} </li>
+            <li> {{profesor.email}} </li>
+            <li> {{profesor.profesion}} </li>
+
+        </ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "AppCoder/cursos.html" %}
+{% load static %}
+
+{% block getCursos %}
+<div class="formulario-custom">
+
+    <h5>Consultar Cursos</h5>
+    <form action="/Appcoder/buscarCursos/" method="GET">
+        <input placeholder="Nombre" type="text" name="nombre" id="nombre">
+        <input type="submit" value="Buscar">
+    </form>
+
+
+
+    {% if cursos %}
+    <div class="resultados">
+
+        <h6>Resultados:</h6>
+
+        {% for curso in cursos %}
+        <ul>
+            <li> {{curso.nombre}} </li>
+            <li> {{curso.camada}} </li>    
+        </ul>    
+        {% endfor %}
+
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

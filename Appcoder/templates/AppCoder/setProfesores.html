@@ -1,0 +1,20 @@
+{% extends "AppCoder/profesores.html" %}
+{% load static %}
+
+{% block setProfesores %}
+<div class="formulario-custom">
+
+    <h5>Crear Profesor</h5>
+
+    <form action="/Appcoder/setProfesores/" method="post"> {% csrf_token %}
+        <table>
+
+            {{ miFormulario.as_table }}
+
+        </table>
+        <input type="submit" value="Enviar">
+
+    </form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="{% static 'AppCoder/css/bootstrap.min.css'%}" rel="stylesheet" />
+    <link href="{% static 'AppCoder/css/styles.css'%}" rel="stylesheet" />
+
+    <script src="{% static 'AppCoder/js/bootstrap.min.js'%}"></script>
+
+    <title>Inicio|AppCoder</title>
+
+</head>
+
+<body>
+
+    <!-- header -->
+
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+
+        <div class="container px-4 px-lg-5 barra-nav">
+
+            <a class="navbar-brand" href="{% url 'Inicio' %}">Coder House</a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+
+                Menu
+
+                <i class="fas fa-bars"></i>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'Cursos' %}">Cursos</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'Entregables' %}">Entregables</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'Estudiantes' %}">Estudiantes</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'Profesores' %}">Profesores</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="">{{avatar}}</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'perfil' %}">{{user.username}}</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Logout</a></li>
+
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+    <div id="banner">
+        <div id="descr-web">
+            <h5>AppCoder - Plataforma de Administración Académica</h5>
+            Gestión eficiente de estudiantes, cursos y profesores, nuestra plataforma
+            proporciona herramientas fáciles de usar que permiten llevar un control preciso y centralizado de toda la
+            información relevante.
+        </div>
+    </div>
+
+    <div id="main-container">
+        {% block contenidoQueCambia %}
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

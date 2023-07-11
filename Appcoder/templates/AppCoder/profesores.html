@@ -1,0 +1,29 @@
+{% extends "AppCoder/inicio.html" %} 
+{% load static %} 
+{% block contenidoQueCambia %} 
+  <h3>Profesores</h3>
+
+  <div class="tab-container">
+
+    <div class="tab" id="formSetProfesores">
+      <div>
+        <a href="{% url 'setProfesores' %}" class="btn">Cargar profesor</a>
+      </div>  
+    </div>
+    
+    <div class="tab" id="forGetProfesores">
+      <div>
+        <a href="{% url 'getProfesores' %}" class="btn">Buscar Profesor</a>
+      </div>  
+    </div>
+  </div>
+  
+  <div class="contenido">
+    {% block setProfesores %}
+    {% endblock %}
+    
+    {% block getProfesores %}
+    {% endblock %}
+  </div>
+  
+{% endblock %}

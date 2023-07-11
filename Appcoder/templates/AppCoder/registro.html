@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro </title>
+</head>
+
+<body>
+    <div class="containerForm">
+        <form action="" method="POST" class="formLogin"> {% csrf_token %}
+            <h3
+                style="color:white; font-weight: bold;margin-bottom: 30px; display: flex;justify-content: center;align-items: center;">Registro Coder
+            </h3>
+
+            <div>
+                <input name="username" type="text" placeholder="user" class="inputLogin">
+            </div>
+
+            <div>
+                <input name="password1" type="password" placeholder="password" class="inputLogin">
+            </div>
+
+            <div>
+                <input name="password2" type="password" placeholder="password confirmation" class="inputLogin">
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="submit">Registrar</button>
+            </div>
+
+            {% if error %}
+            <p style="color: red ;">{{error}}</p>
+            {% endif %}
+
+            <p>Ya tiene una cuenta? <a href="/Appcoder/login">Iniciar sesion</a></p>
+        </form>
+
+
+
+    </div>
+
+</body>
+
+</html>

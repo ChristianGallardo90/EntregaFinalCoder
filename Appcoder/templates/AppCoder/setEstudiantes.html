@@ -1,0 +1,52 @@
+{% extends "AppCoder/estudiantes.html" %}
+{% load static %}
+
+{% block setEstudiantes %}
+<div class="formulario-custom">
+
+    <h5>Crear Estudiante</h5>
+
+    <form action="/Appcoder/setEstudiantes/" method="post"> {% csrf_token %}
+        <table>
+
+            {{ miFormulario.as_table }}
+
+        </table>
+        <input type="submit" value="Enviar">
+
+    </form>
+
+    <h5>Estudiantes disponibles</h5>
+    
+    
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+    
+        </tr>
+    
+    
+        {% for estudiante in Estudiantes %}
+    
+        <tr>
+            <td>{{estudiante.nombre}}</td>
+            <td>{{estudiante.apellido}}</td>
+            <td>{{estudiante.email}}</td>
+            <td><button class="btn btn-danger "><a href="{% url 'eliminarEstudiante' estudiante.nombre %}">X</a></button></td>
+            <td><button class="btn btn-warning "><a href="{% url 'editarEstudiante' estudiante.nombre %}">Editar</a></button></td>
+        </tr>
+    
+        {% endfor %}
+    
+    
+    
+    
+    
+    
+    </table>
+</div>
+{% endblock %}

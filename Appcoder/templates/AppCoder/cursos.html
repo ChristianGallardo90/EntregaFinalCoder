@@ -1,0 +1,29 @@
+{% extends "AppCoder/inicio.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+<h3>Cursos</h3>
+
+<div class="tab-container">
+  <div class="tab" id="formSetCursos">
+    <div>
+      <a href="{% url 'setCursos' %}" class="btn">Cargar cursos</a>
+    </div>
+  </div>
+  
+  <div class="tab" id="forGetCursos">
+    <div>
+      <a href="{% url 'getCursos' %}" class="btn">Buscar Cursos</a>
+    </div>
+  </div>
+</div>
+
+<div class="contenido">
+  {% block setCursos %}
+  {% endblock %}
+  
+  {% block getCursos %}
+  {% endblock %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "AppCoder/inicio.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<div>
+    <ul>
+        {{user.username}}
+        {{user.email}}
+        {{user.first_name}}
+        {{user.last_name}}
+
+    </ul>
+    <a href="/Appcoder/Perfil/editarPerfil" class="btn btn-success" style="text-decoration: none;color: white;">EditarPerfil</a>
+
+    <a href="/Appcoder/Perfil/changeAvatar" class="btn btn-success" style="text-decoration: none;color: white;">Avatar</a>
+
+
+</div>
+
+{% endblock %}
