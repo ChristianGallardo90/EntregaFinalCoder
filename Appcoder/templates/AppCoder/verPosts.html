@@ -1,0 +1,37 @@
+{% extends "AppCoder/inicio.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+<h1>Todos los Posts</h1>
+{% if posts %}
+{% for post in posts %}
+<div class="post">
+    <h2>{{ post.title }}</h2>
+    <p><strong>Subtitle:</strong> {{ post.subtitle }}</p>
+    <p><strong>Author Name:</strong> {{ post.author_name }}</p>
+    <p>{{ post.content }}</p>
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    {% endif %}
+    <form method="POST" action="{% url 'eliminar_post' post.pk %}">
+        {% csrf_token %}
+        <button type="submit">Eliminar</button>
+    </form>
+</div>
+{% endfor %}
+{% else %}
+<p>No hay ningún post creado.</p>
+{% endif %}
+
+<!-- Controles de paginación -->
+<div class="pagination">
+    {% if posts.has_previous %}
+    <a href="?page={{ posts.previous_page_number }}">Anterior</a>
+    {% endif %}
+
+    <span class="current-page">{{ posts.number }}</span>
+
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}">Siguiente</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "AppCoder/inicio.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1>Enviar Mensaje</h1>
+<form method="post" action="{% url 'enviarMensaje' %}">
+    {% csrf_token %}
+    <div>
+        <label for="destinatario">Destinatario:</label>
+        <select name="destinatario" id="destinatario">
+            {% for usuario in usuarios %}
+            <option value="{{ usuario.id }}">{{ usuario.username }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="contenido">Contenido:</label>
+        <textarea name="contenido" id="contenido"></textarea>
+    </div>
+    <button type="submit">Enviar</button>
+</form>
+<a href="{% url 'bandejaEntrada' %}">Volver a la bandeja de entrada</a>
+<!-- Botón para regresar a la bandeja de entrada -->
+{% endblock %}

@@ -2,45 +2,53 @@
 <html lang="en">
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'AppCoder/css/login.css'%}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro </title>
+    <title>Registro</title>
 </head>
 
 <body>
     <div class="containerForm">
-        <form action="" method="POST" class="formLogin"> {% csrf_token %}
+        <div class="bg-animation"></div>
+        <form method="POST" class="formLogin">
+            {% csrf_token %}
             <h3
-                style="color:white; font-weight: bold;margin-bottom: 30px; display: flex;justify-content: center;align-items: center;">Registro Coder
-            </h3>
+                style="color:white; font-weight: bold;margin-bottom: 30px; display: flex;justify-content: center;align-items: center;">
+                Registro Coder</h3>
 
-            <div>
-                <input name="username" type="text" placeholder="user" class="inputLogin">
+            <div class="row">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {% if form.username.errors %}
+                <p style="color: red;">{{ form.username.errors }}</p>
+                {% endif %}
             </div>
 
-            <div>
-                <input name="password1" type="password" placeholder="password" class="inputLogin">
+            <div class="row">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                <p style="color: red;">{{ form.password1.errors }}</p>
+                {% endif %}
             </div>
 
-            <div>
-                <input name="password2" type="password" placeholder="password confirmation" class="inputLogin">
+            <div class="row">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                <p style="color: red;">{{ form.password2.errors }}</p>
+                {% endif %}
             </div>
 
             <div>
                 <button class="btn btn-primary" type="submit">Registrar</button>
             </div>
 
-            {% if error %}
-            <p style="color: red ;">{{error}}</p>
-            {% endif %}
-
-            <p>Ya tiene una cuenta? <a href="/Appcoder/login">Iniciar sesion</a></p>
+            <p>Ya tiene una cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
         </form>
-
-
-
     </div>
-
 </body>
 
 </html>

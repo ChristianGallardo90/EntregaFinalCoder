@@ -49,17 +49,30 @@
 
                     <li class="nav-item"><a class="nav-link" href="{% url 'Cursos' %}">Cursos</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="{% url 'Entregables' %}">Entregables</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="{% url 'Estudiantes' %}">Estudiantes</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="{% url 'Profesores' %}">Profesores</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href=""><img src="{{avatar}}"width="40px" alt="perfil"></a></li>
+                    
+                    <li class="nav-item"><a class="nav-link" href="{% url 'bandejaEntrada' %}">Mensajes</a></li>
+                    
+                    <li class="nav-item"><a class="nav-link" href="{% url 'acercaDeMi' %}">Acerca de mi</a></li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'perfil' %}" style="display: flex;align-items: center;">
+                            <div style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; margin-right: .5rem;">
+                                <img src="{{avatar}}" style="width: 100%; height: 100%; object-fit: cover;" alt="perfil">
+                            </div>
+                            {{user.username}}
+                         </a>
+                    </li>
 
-                    <li class="nav-item"><a class="nav-link" href="{% url 'perfil' %}">{{user.username}}</a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Logout</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="min-width: 20px;" href="{% url 'login' %}">
+                            <img src="/media/img/cerrar-sesion.png" alt="">
+                        </a>
+                    </li>
 
 
 

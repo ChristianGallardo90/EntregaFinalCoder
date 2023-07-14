@@ -1,0 +1,23 @@
+{% extends "AppCoder/inicio.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1>Bandeja de Entrada</h1>
+{% if mensajes %}
+<ul>
+    {% for mensaje in mensajes %}
+    <li>
+        <strong>De:</strong> {{ mensaje.remitente }}
+        <strong>Fecha:</strong> {{ mensaje.fecha_creacion }}
+        <a href="{% url 'verMensajes' mensaje.id %}">Ver mensaje</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay mensajes en la bandeja de entrada.</p>
+{% endif %}
+
+
+<!-- Botón para enviar un nuevo mensaje -->
+<a href="{% url 'enviarMensaje' %}" class="btn btn-success">Enviar Mensaje</a>
+{% endblock %}

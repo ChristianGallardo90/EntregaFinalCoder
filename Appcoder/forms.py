@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm
 from django.contrib.auth.models import User
 from .models import Post
+from django.core.validators import FileExtensionValidator, MaxLengthValidator
 
 class formSetEstudiante(forms.Form):
     nombre = forms.CharField(max_length=30)
@@ -44,6 +45,12 @@ class AvatarForm(forms.Form):
     avatar = forms.ImageField()
 
 class PostForm(forms.ModelForm):
+    image = forms.ImageField(
+        validators=[
+            FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png']),
+            MaxLengthValidator(5 * 1024 * 1024, message='El tamaño máximo permitido es de 5 MB.')
+        ])
+
     class Meta:
         model = Post
-        fields = ('title', 'content', 'image')    
+        fields = ['title', 'subtitle', 'author_name', 'content', 'image']

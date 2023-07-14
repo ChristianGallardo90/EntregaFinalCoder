@@ -21,10 +21,10 @@
     
     <table>
         <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Correo</th>
-            <th>Eliminar</th>
+            <th  style="padding-right: 1rem;">Nombre</th>
+            <th  style="padding-right: 1rem;">Apellido</th>
+            <th  style="padding-right: 1rem;">Correo</th>
+            <th  style="padding-right: 1rem;">Eliminar</th>
             <th>Editar</th>
     
         </tr>
@@ -33,11 +33,11 @@
         {% for estudiante in Estudiantes %}
     
         <tr>
-            <td>{{estudiante.nombre}}</td>
-            <td>{{estudiante.apellido}}</td>
-            <td>{{estudiante.email}}</td>
-            <td><button class="btn btn-danger "><a href="{% url 'eliminarEstudiante' estudiante.nombre %}">X</a></button></td>
-            <td><button class="btn btn-warning "><a href="{% url 'editarEstudiante' estudiante.nombre %}">Editar</a></button></td>
+            <td style="padding-right: 1rem;">{{estudiante.nombre}}</td>
+            <td style="padding-right: 1rem;">{{estudiante.apellido}}</td>
+            <td style="padding-right: 1rem;">{{estudiante.email}}</td>
+            <td><button class="btn btn-danger" style="background-color: #45c5f2; color: white; text-decoration: none;"><a href="{% url 'eliminarEstudiante' estudiante.nombre %}" style="color: white; text-decoration: none;">X</a></button></td>
+            <td><button class="btn btn-warning" style="background-color: #45c5f2; color: white; text-decoration: none;"><a href="{% url 'editarEstudiante' estudiante.nombre %}" style="color: white; text-decoration: none;">Editar</a></button></td>
         </tr>
     
         {% endfor %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from Appcoder.models import Estudiante,Curso,Profesor,Avatar
 from Appcoder.forms import formSetEstudiante,formSetCursos,formSetProfesor,UserEditForm,ChangePasswordForm,AvatarForm
@@ -8,6 +8,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Post
 from .forms import PostForm
+from django.core.paginator import Paginator
+from .models import Mensaje
+from django.contrib.auth import logout
+
+
 
 # Create your views here.
 
@@ -31,9 +36,9 @@ def estudiantes(request):
     return render(request,"AppCoder/estudiantes.html",{"avatar": avatar})
 
 @login_required
-def entregables(request):
+def acercaDeMi(request):
     avatar = getavatar(request)
-    return render(request,"AppCoder/entregables.html",{"avatar": avatar})
+    return render(request,"AppCoder/acercaDeMi.html",{"avatar": avatar})
 
 @login_required
 def setEstudiantes(request):
@@ -138,59 +143,69 @@ def leerEstudiantes(request):
     Estudiantes = Estudiante.objects.all()
     return render (request, "Appcoder/setEstudiantes.html",{"Estudiantes":Estudiantes,"avatar": avatar})
 
+from django.contrib.auth.decorators import login_required
+
 @login_required
-def eliminarEstudiante(request,nombre_estudiante):
+def eliminarEstudiante(request, nombre_estudiante):
     avatar = getavatar(request)
-    estudiante = Estudiante.objects.get(nombre = nombre_estudiante)
-    estudiante.delete()
-    miFormulario = formSetEstudiante()
-    Estudiantes = Estudiante.objects.all()
-    return render (request, "Appcoder/setEstudiantes.html",{"miFormulario":miFormulario, "Estudiantes":Estudiantes,"avatar": avatar})
+    
+    if request.user.is_superuser:
+        estudiante = Estudiante.objects.get(nombre=nombre_estudiante)
+        estudiante.delete()
+        miFormulario = formSetEstudiante()
+        Estudiantes = Estudiante.objects.all()
+        return render(request, "Appcoder/setEstudiantes.html", {"miFormulario": miFormulario, "Estudiantes": Estudiantes, "avatar": avatar})
+    else:
+        return HttpResponse("No tienes permisos para eliminar este estudiante.")
+
+from django.contrib.auth.decorators import login_required
 
 @login_required
 def editarEstudiante(request, nombre_estudiante):
     avatar = getavatar(request)
-    estudiante = Estudiante.objects.get(nombre = nombre_estudiante)
-    if request.method == 'POST':
-       
-       miFormulario = formSetEstudiante(request.POST)
-       if miFormulario.is_valid():
-           data = miFormulario.cleaned_data
-
-           estudiante.nombre = data['nombre']
-           estudiante.apellido = data['apellido']
-           estudiante.email = data['email']
-           estudiante.save()
-           miFormulario = formSetEstudiante()
-           Estudiantes = Estudiante.objects.all()
-           
-           return render(request,"AppCoder/setEstudiantes.html",{"miFormulario":miFormulario,"Estudiantes": Estudiantes})
+    
+    if request.user.is_superuser:
+        estudiante = Estudiante.objects.get(nombre=nombre_estudiante)
+        if request.method == 'POST':
+            miFormulario = formSetEstudiante(request.POST)
+            if miFormulario.is_valid():
+                data = miFormulario.cleaned_data
+                estudiante.nombre = data['nombre']
+                estudiante.apellido = data['apellido']
+                estudiante.email = data['email']
+                estudiante.save()
+                miFormulario = formSetEstudiante()
+                Estudiantes = Estudiante.objects.all()
+                return render(request, "AppCoder/setEstudiantes.html", {"miFormulario": miFormulario, "Estudiantes": Estudiantes})
+        else:
+            miFormulario = formSetEstudiante(initial={'nombre': estudiante.nombre, 'apellido': estudiante.apellido, 'email': estudiante.email})
+            return render(request, "AppCoder/editarEstudiante.html", {"miFormulario": miFormulario, "nombre": nombre_estudiante, "avatar": avatar})
     else:
-        miFormulario = formSetEstudiante(initial={'nombre':estudiante.nombre,'apellido':estudiante.apellido,'email':estudiante.email})
+        return HttpResponse("No tienes permisos para editar este estudiante.")
 
-        return render(request,"AppCoder/editarEstudiante.html",{"miFormulario":miFormulario,"nombre":nombre_estudiante,"avatar": avatar})
 
 def loginWeb(request): 
+    avatar = getavatar(request)
     if request.method == "POST":
         user = authenticate(username = request.POST['user'],password = request.POST['password'])
         if user is not None:
             login(request, user)
             return render(request,"Appcoder/inicio.html")
         else:
-            return render(request,'Appcoder/login.html',{'error':'usuario o contraseña incorrectos'})
+            return render(request,'Appcoder/login.html',{'error':'usuario o contraseña incorrectos',"avatar": avatar})
     else:
-        return render(request,'Appcoder/login.html')    
+        return render(request,'Appcoder/login.html',{"avatar": avatar})    
     
 def registro(request):
     if request.method == "POST":
-        userCreate = UserCreationForm(request.POST)
-        if userCreate is not None:  
-            userCreate.save()
-            return render(request, "Appcoder/login.html")
-        
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirigir al usuario a la página de inicio de sesión
     else:
+        form = UserCreationForm()
 
-        return render(request, "Appcoder/registro.html")
+    return render(request, "Appcoder/registro.html", {'form': form})
     
 @login_required    
 def perfilview (request):
@@ -266,22 +281,84 @@ def getavatar(request):
         avatar = None
     return avatar        
 
+@login_required 
 def createPost(request):
+    avatar = getavatar(request)
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return render(request,"Appcoder/inicio.html")
+            post = form.save(commit=False)  
+            post.subtitle = form.cleaned_data['subtitle']  
+            post.author_name = form.cleaned_data['author_name'] 
+            post.save()  
+            
+            return redirect('ver_posts',)
     else:
         form = PostForm()
     
-    return render(request, 'Appcoder/createPost.html', {'form': form})
+    return render(request, 'Appcoder/createPost.html', {'form': form,"avatar": avatar})
 
-def detailPost(request, pk):
+@login_required 
+def verPosts(request):
+    avatar = getavatar(request)
+    post_list = Post.objects.all()
+    paginator = Paginator(post_list, 3)  
+
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
+
+    return render(request, 'Appcoder/verPosts.html', {'posts': posts, 'avatar': avatar})
+
+@login_required
+def eliminarPost(request, pk):
+    if request.user.is_superuser:
+        post = Post.objects.get(pk=pk)
+        post.delete()
+        return redirect('ver_posts')
+    else:
+        return HttpResponse("No tienes permisos para eliminar este post.")
+
+@login_required
+def bandejaEntrada(request):
+    avatar = getavatar(request)
+    mensajes = Mensaje.objects.filter(destinatario=request.user).order_by('-fecha_creacion')
+    return render(request, 'Appcoder/bandejaEntrada.html', {'mensajes': mensajes,"avatar": avatar})
+
+@login_required
+def enviarMensaje(request):
+    avatar = getavatar(request)
+    if request.method == 'POST':
+        destinatario_id = request.POST.get('destinatario')
+        contenido = request.POST.get('contenido')
+        destinatario = User.objects.get(id=destinatario_id)
+        mensaje = Mensaje(remitente=request.user, destinatario=destinatario, contenido=contenido)
+        mensaje.save()
+        return redirect('bandejaEntrada')
+    else:
+        usuarios = User.objects.exclude(id=request.user.id)
+        return render(request, 'Appcoder/enviarMensajes.html', {'usuarios': usuarios,"avatar": avatar})
+
+@login_required
+def verMensajes(request, mensaje_id=None):
+    avatar = getavatar(request)
+    if request.method == 'POST':
+        # Lógica para procesar la acción de la solicitud POST
+        pass
+    else:
+        mensaje = Mensaje.objects.get(id=mensaje_id)
+        if mensaje.destinatario == request.user:
+            return render(request, 'Appcoder/verMensajes.html', {'mensaje': mensaje,"avatar": avatar})
+        else:
+            return redirect('bandejaEntrada')
+        
+def logout_view(request):
+
+
     
-    post = Post.objects.get(pk=pk)
-    return render(request, 'Appcoder/detailPost.html', {'post': post})
+    logout(request)
+    return redirect('inicio.html',)       
 
-def home(request):
-    posts = Post.objects.all()
-    return render(request, 'Appcoder/inicio.html', {'posts': posts})
+from django.shortcuts import redirect
+
+
+

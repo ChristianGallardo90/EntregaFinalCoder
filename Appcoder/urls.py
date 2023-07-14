@@ -1,11 +1,14 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from Appcoder.views import inicio, cursos, entregables, estudiantes, profesores, setEstudiantes,getEstudiantes,buscarEstudiante,setCursos,getCursos,buscarCursos,setProfesores,getProfesores,buscarProfesores,eliminarEstudiante,editarEstudiante,loginWeb,registro,perfilview,editarPerfil,changePassword,editAvatar,createPost,detailPost
+from Appcoder.views import  inicio, cursos,acercaDeMi, estudiantes, profesores, setEstudiantes,getEstudiantes,buscarEstudiante,setCursos,getCursos,buscarCursos,setProfesores,getProfesores,buscarProfesores,eliminarEstudiante,editarEstudiante,loginWeb,registro,perfilview,editarPerfil,changePassword,editAvatar,createPost,verPosts,eliminarPost,enviarMensaje,bandejaEntrada,verMensajes
+
 urlpatterns = [
+    
+
     
     path('inicio/', inicio, name="Inicio"),
     path('cursos/', cursos,name="Cursos"),
-    path('entregables/', entregables,name="Entregables"),
+    path('acercaDeMi/', acercaDeMi,name="acercaDeMi"),
     path('estudiantes/', estudiantes,name="Estudiantes"),
     path('profesores/', profesores,name="Profesores"),
     path('setEstudiantes/', setEstudiantes,name="setEstudiantes"),
@@ -27,8 +30,14 @@ urlpatterns = [
     path('Perfil/changePassword/',changePassword, name="changePassword"),
     path('Perfil/changeAvatar/',editAvatar, name="editAvatar"),
     path('create_post/', createPost, name='create_post'),
-    path('post/<int:pk>/', detailPost, name='detail_post'),
-
+    path('ver_posts/', verPosts, name='ver_posts'),
+    path('eliminar_post/<int:pk>/', eliminarPost, name='eliminar_post'),
+    path('enviarMensaje/', enviarMensaje, name='enviarMensaje'),
+    path('bandejaEntrada/', bandejaEntrada, name='bandejaEntrada'),
+    path('verMensajes/<int:mensaje_id>/', verMensajes, name='verMensajes'),
+    
+    
+    
     
     
     
