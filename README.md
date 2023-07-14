@@ -1,13 +1,13 @@
 # Readme de aplicacion.
 Nombre de la Aplicación: **EntregaCoder**
 
-Descripción: **EntregaCoder** es una aplicación web que permite administrar estudiantes, cursos y profesores 
+Descripción: **EntregaCoder** es una aplicación web que permite administrar estudiantes, cursos y profesores . en la misma los usuarios pueden creas posts y mandarse mensajes a sus bandejas de entrada
 
 **Instalación**
 
 1. tener Python y Django instalados en tu sistema.
 
-2. Clona el repositorio de la aplicación desde GitHub: `git clone https://github.com/ChristianGallardo90/tercera-entrega-gallardo`
+2. Clona el repositorio de la aplicación desde GitHub: `git clone https://github.com/ChristianGallardo90/EntregaFinalCoder.git`
 
 3. Navega al directorio del proyecto: cd **tercera-entrega-gallardo**
 
@@ -30,10 +30,11 @@ En la carpeta `static` estan todos los archivos de css, javascript.
 
 ## Uso
 
-1. Accede a la página de inicio para verificar que la aplicación se carga correctamente.
+1. Accede a la página de login, para crear tu usuarui y comenzar a utilizar la web, accede a la pagina de inicio para verificar que la aplicación se carga correctamente.
 
-2. Explora las diferentes secciones de la aplicación, como cursos, estudiantes y profesores.
+2. Explora las diferentes secciones de la aplicación, como post, cursos, estudiantes, profesores, mensajes etc.
 
-3. Utiliza las funciones de las secciones para agregar nuevos estudiantes, cursos y profesores.
+3. Utiliza las funciones de las secciones para agregar nuevos estudiantes, cursos, profesores o crear post.
 
 4. Utiliza las funciones de búsqueda para encontrar estudiantes, cursos o profesores
+

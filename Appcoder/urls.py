@@ -1,10 +1,11 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
+from django.views.generic.base import RedirectView
 from Appcoder.views import  inicio, cursos,acercaDeMi, estudiantes, profesores, setEstudiantes,getEstudiantes,buscarEstudiante,setCursos,getCursos,buscarCursos,setProfesores,getProfesores,buscarProfesores,eliminarEstudiante,editarEstudiante,loginWeb,registro,perfilview,editarPerfil,changePassword,editAvatar,createPost,verPosts,eliminarPost,enviarMensaje,bandejaEntrada,verMensajes
 
 urlpatterns = [
     
-
+    
     
     path('inicio/', inicio, name="Inicio"),
     path('cursos/', cursos,name="Cursos"),
@@ -35,6 +36,7 @@ urlpatterns = [
     path('enviarMensaje/', enviarMensaje, name='enviarMensaje'),
     path('bandejaEntrada/', bandejaEntrada, name='bandejaEntrada'),
     path('verMensajes/<int:mensaje_id>/', verMensajes, name='verMensajes'),
+    
     
     
     

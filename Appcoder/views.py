@@ -11,10 +11,12 @@ from .forms import PostForm
 from django.core.paginator import Paginator
 from .models import Mensaje
 from django.contrib.auth import logout
+from datetime import date
 
 
 
 # Create your views here.
+
 
 @login_required
 def inicio(request):
@@ -290,6 +292,7 @@ def createPost(request):
             post = form.save(commit=False)  
             post.subtitle = form.cleaned_data['subtitle']  
             post.author_name = form.cleaned_data['author_name'] 
+            post.fecha_creacion = date.today()
             post.save()  
             
             return redirect('ver_posts',)
@@ -358,7 +361,8 @@ def logout_view(request):
     logout(request)
     return redirect('inicio.html',)       
 
-from django.shortcuts import redirect
+
+
 
 
 
