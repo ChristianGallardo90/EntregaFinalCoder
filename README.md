@@ -1,7 +1,7 @@
 # Readme de aplicacion.
-Nombre de la Aplicación: **EntregaCoder**
+Nombre de la Aplicación: **EntregaFinalCoder**
 
-Descripción: **EntregaCoder** es una aplicación web que permite administrar estudiantes, cursos y profesores . en la misma los usuarios pueden creas posts y mandarse mensajes a sus bandejas de entrada
+Descripción: **EntregaFinalCoder** es una aplicación web que permite administrar estudiantes, cursos y profesores . en la misma los usuarios pueden creas posts y mandarse mensajes a sus bandejas de entrada
 
 **Instalación**
 
@@ -9,7 +9,7 @@ Descripción: **EntregaCoder** es una aplicación web que permite administrar es
 
 2. Clona el repositorio de la aplicación desde GitHub: `git clone https://github.com/ChristianGallardo90/EntregaFinalCoder.git`
 
-3. Navega al directorio del proyecto: cd **tercera-entrega-gallardo**
+3. Navega al directorio del proyecto: cd **EntregaFinalCoder**
 
 4. Instala las dependencias del proyecto: `pip install -r requirements.txt`
 
@@ -21,7 +21,7 @@ Descripción: **EntregaCoder** es una aplicación web que permite administrar es
 
 ## Estructura del Proyecto
 
-La carpeta **tercera-entrega-gallardo** contiene toda la logica de la aplicacion web con sus funcionalidades.
+La carpeta **EntregaFinalCoder** contiene toda la logica de la aplicacion web con sus funcionalidades.
 
 Dentro en la carpeta `templates` se encuentran todas las plantillas de html necesarias para las paginas.
 
